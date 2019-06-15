@@ -10,3 +10,6 @@ class LocationImage(BaseModel):
 
     def to_dict(self):
         return model_to_dict(self)
+
+    class Meta:
+        db_table = "location_images"

@@ -13,11 +13,11 @@ class MembershipType(Enum):
 
 class Membership(BaseModel):
     name = pw.CharField(null=False)
-    type = pw.CharField(null=False)
+    member_type = pw.CharField(null=False)
     description = pw.TextField(null=False, default="")
 
     def to_dict(self):
         return model_to_dict(self)
 
     class Meta:
-        db_table = "categories"
+        db_table = "memberships"
