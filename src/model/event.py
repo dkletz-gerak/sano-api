@@ -6,6 +6,7 @@ from playhouse.shortcuts import model_to_dict
 
 class Event(BaseModel):
     name = pw.CharField(max_length=100, null=False)
+    image = pw.CharField(null=False)
     description = pw.TextField()
     location = pw.ForeignKeyField(Location)
     start_date = pw.DateTimeField()
