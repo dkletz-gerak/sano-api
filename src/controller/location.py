@@ -3,7 +3,7 @@ from peewee import fn
 import math
 from core.util import *
 from src.exception import *
-from src.model import Location, LocationActivity, Activity, Category
+from src.model import Location, LocationActivity, Activity, Category, Schedule
 from datetime import datetime
 
 
@@ -27,6 +27,8 @@ def get_location_by_id(location_id):
         event.to_dict() for event in location.events if event.end_date > now
     ]
     data["routines"] = [routine.to_dict() for routine in location.routines if not routine.is_stop]
+    for routine in data["routines"]:
+        routine["schedules"] = [schedule.to_dict() for schedule in Schedule.select().where(Schedule.routine == routine["id"])]
 
     return respond_data(data)
 
