@@ -12,3 +12,6 @@ class Place(BaseModel):
 
     def to_dict(self):
         return model_to_dict(Place)
+
+    class Meta:
+        db_table = "places"

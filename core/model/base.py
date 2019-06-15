@@ -1,7 +1,7 @@
 from playhouse.shortcuts import model_to_dict
 from datetime import datetime
 import peewee as pw
-from src.database import db
+from core.database.database import db
 import pytz
 
 

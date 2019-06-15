@@ -18,8 +18,7 @@ if len(argv) == 1:
     print_help()
 else:
     if argv[1] == "start" and len(argv) == 4:
-        func = argv[2]
-        module = __import__(func)
+        module = __import__(argv[2])
         app = getattr(module, argv[3])
         app.run(
             host=HOST,
@@ -27,7 +26,9 @@ else:
             threaded=THREADED,
             debug=DEBUG,
         )
-    elif argv[2] == "migrate":
-        pass
+    elif argv[2] == "migrate" and len(argv) == 3:
+        module = __import__("core.migration")
+        func = getattr(module, argv[2])
+        func()
     else:
         print_help()

@@ -1,4 +1,4 @@
-from src.database import db
+from core.database.database import db
 from playhouse.migrate import *
 
 
