@@ -1,7 +1,8 @@
 from enum import Enum
-from core.model.base import BaseModel
-from playhouse.shortcuts import model_to_dict
+
 import peewee as pw
+
+from core.model.base import BaseModel
 from src.model.user import User
 
 
@@ -16,9 +17,6 @@ class Membership(BaseModel):
     member_type = pw.CharField(null=False)
     description = pw.TextField(null=False, default="")
     user = pw.ForeignKeyField(User, backref="membership", unique=True)
-
-    def to_dict(self):
-        return model_to_dict(self)
 
     class Meta:
         db_table = "memberships"
