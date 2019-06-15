@@ -48,29 +48,31 @@ def search_location():
         query = Activity.select().where(Activity.id.in_(preferences))
     else:
         query = Activity.select()
-    activities = [activity.to_dict() for activity in query]
-    activities_query = [activity["id"] for activity in activities]
+    activities_query = [activity.to_dict()["id"] for activity in query]
 
     query = Location.select(Location,
-                            fn.SUM(LocationActivity.weight).alias('weight'),
-                            fn.GROUP_CONCAT(Activity.name).alias('activities')) \
+                            fn.SUM(LocationActivity.weight).alias('weight')) \
                     .join(LocationActivity) \
-                    .join(Activity) \
                     .where(LocationActivity.activity.in_(activities_query)) \
                     .group_by(Location)
 
     locations = []
     for location in query.namedtuples():
         weight = location.weight
+
         if weight == 0:
             weight = 1
+        elif len(preferences) == 0:
+            weight = 1
+
         locations.append(
             dict(
                 name=location.name,
                 logo=location.logo,
                 address=location.address,
+                normal_weight=weight,
                 calculated_weight=_calculate_weight(location.lat-float(lat), location.long-float(long), weight),
-                activities=location.activities.split(",")
+                price=location.price
             )
         )
 
