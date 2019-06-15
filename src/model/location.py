@@ -1,6 +1,7 @@
 from core.model.base import BaseModel
 from playhouse.shortcuts import model_to_dict
 import peewee as pw
+from src.model.category import Category
 
 
 class Location(BaseModel):
@@ -9,6 +10,7 @@ class Location(BaseModel):
     address = pw.CharField(null=False)
     lat = pw.FloatField(null=False)
     long = pw.FloatField(null=False)
+    category = pw.ForeignKeyField(Category)
 
     def to_dict(self):
         return model_to_dict(self)

@@ -6,6 +6,7 @@ from src.model.location import Location
 
 class Routine(BaseModel):
     name = pw.CharField(max_length=100, null=False)
+
     requirements = pw.CharField(null=False)
     location = pw.ForeignKeyField(Location, null=False, backref='routines')
 
