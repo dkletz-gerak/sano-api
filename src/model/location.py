@@ -3,7 +3,7 @@ from playhouse.shortcuts import model_to_dict
 import peewee as pw
 
 
-class Place(BaseModel):
+class Location(BaseModel):
     name = pw.CharField(null=False)
     logo = pw.CharField(null=False)
     address = pw.CharField(null=False)
@@ -11,7 +11,7 @@ class Place(BaseModel):
     long = pw.FloatField(null=False)
 
     def to_dict(self):
-        return model_to_dict(Place)
+        return model_to_dict(self)
 
     class Meta:
-        db_table = "places"
+        db_table = "locations"
