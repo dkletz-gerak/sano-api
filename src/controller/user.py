@@ -1,7 +1,7 @@
 from secrets import token_urlsafe
 from core.util import *
 from src.exception import *
-from src.model.user import User, UserRole
+from src.model import User, UserRole, Membership
 from src.model.redis.session import Session
 from flask import request, g
 
@@ -54,4 +54,7 @@ def get_profile():
     user = g.user
     user = User.get_or_none(User.id == user["id"])
 
-    return respond_data(user.to_dict())
+    data = user.to_dict()
+    data["membership"] = Membership.get_or_none(Membership.user == user.id)
+
+    return respond_data(data)
