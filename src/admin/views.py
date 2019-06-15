@@ -93,3 +93,7 @@ class LocationImageAdmin(ModelView):
 
 class LocationActivityAdmin(ModelView):
     pass
+
+
+class MarathonAdmin(ModelView):
+    pass

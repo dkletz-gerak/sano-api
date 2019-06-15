@@ -12,4 +12,5 @@ views = [
     ScheduleAdmin(Schedule),
     LocationImageAdmin(LocationImage),
     LocationActivityAdmin(LocationActivity),
+    MarathonAdmin(Marathon)
 ]
