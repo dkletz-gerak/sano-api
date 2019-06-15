@@ -5,6 +5,7 @@ import peewee as pw
 
 class Activity(BaseModel):
     name = pw.CharField(null=False)
+    url_image = pw.CharField(null=False)
 
     def to_dict(self):
         return model_to_dict(self)
