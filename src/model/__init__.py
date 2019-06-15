@@ -9,6 +9,7 @@ from src.model.event import Event
 from src.model.location_image import LocationImage
 from src.model.location_activity import LocationActivity
 from src.model.schedule import Schedule
+from src.model.marathon import Marathon
 
 
 __all__ = [
@@ -21,5 +22,6 @@ __all__ = [
     "LocationImage",
     "Location",
     "Schedule",
-    "Membership"
+    "Membership",
+    "Marathon"
 ]

@@ -12,6 +12,7 @@ class Location(BaseModel):
     lat = pw.FloatField(null=False)
     long = pw.FloatField(null=False)
     category = pw.ForeignKeyField(Category)
+    price = pw.IntegerField(default=0)
 
     def to_dict(self, recurse=False, backrefs=False):
         return model_to_dict(self, recurse=recurse, backrefs=backrefs, exclude=[Location.created_at, Location.updated_at])

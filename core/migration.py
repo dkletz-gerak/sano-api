@@ -48,3 +48,45 @@ def drop_all_tables():
 def reset_all():
     drop_all_tables()
     create_tables_if_not_exist()
+
+
+def initialize_last_state():
+    files = os.listdir(".")
+    if ".last_state" not in files:
+        with open(".last_state", "w") as f:
+            f.write("1")
+
+
+def get_last_state():
+    with open(".last_state") as f:
+        last_state = int(f.read())
+
+    return last_state
+
+
+def migrate(last_state):
+    files = os.listdir("migration")
+    exists = True
+
+    while exists:
+        filename = f"migrate_{last_state}.py"
+        if filename in files:
+            execute(filename, f"migration/{filename}")
+            last_state += 1
+        else:
+            exists = False
+
+    return last_state
+
+
+def save_last_state(last_state):
+    with open(".last_state", "w") as f:
+        f.write(str(last_state))
+
+
+def main():
+    create_tables_if_not_exist()
+    initialize_last_state()
+    state = get_last_state()
+    state = migrate(state)
+    save_last_state(state)

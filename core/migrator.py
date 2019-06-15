@@ -1,3 +1,5 @@
+from abc import ABC
+
 from core.database.database import db
 from playhouse.migrate import *
 
@@ -11,7 +13,7 @@ class MigrateAction:
         return self.method(*self.params)
 
 
-class Migrator(MySQLMigrator):
+class Migrator(SqliteMigrator, ABC):
     def __init__(self):
         self.actions = []
         super().__init__(db)

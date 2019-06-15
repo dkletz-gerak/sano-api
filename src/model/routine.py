@@ -11,6 +11,7 @@ class Routine(BaseModel):
     description = pw.TextField()
     location = pw.ForeignKeyField(Location, null=False, backref='routines')
     is_stop = pw.BooleanField()
+    price = pw.IntegerField(default=0)
 
     def to_dict(self, recurse=False, backrefs=False):
         return model_to_dict(self, recurse=recurse, backrefs=backrefs, exclude=[Routine.created_at, Routine.updated_at])

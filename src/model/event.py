@@ -12,6 +12,7 @@ class Event(BaseModel):
     location = pw.ForeignKeyField(Location, backref='events')
     start_date = pw.DateTimeField()
     end_date = pw.DateTimeField()
+    price = pw.IntegerField(default=0)
 
     def to_dict(self, recurse=False, backrefs=False):
         return model_to_dict(self, recurse=recurse, backrefs=backrefs, exclude=[Event.created_at, Event.updated_at])
