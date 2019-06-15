@@ -89,3 +89,7 @@ class ScheduleAdmin(ModelView):
 
 class LocationImageAdmin(ModelView):
     pass
+
+
+class LocationActivityAdmin(ModelView):
+    pass

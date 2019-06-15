@@ -13,8 +13,8 @@ class BaseModel(pw.Model):
     created_at = pw.DateTimeField(default=datetime_tz)
     updated_at = pw.DateTimeField(default=datetime_tz)
 
-    def to_dict(self, recurse=False):
-        return model_to_dict(self, recurse=recurse)
+    def to_dict(self, recurse=False, backrefs=False):
+        return model_to_dict(self, recurse=recurse, backrefs=backrefs)
 
     def save(self, *args, **kwargs):
         self.updated_at = datetime_tz().strftime("%Y-%m-%d %H:%M:%S")

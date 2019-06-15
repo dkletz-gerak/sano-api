@@ -24,8 +24,8 @@ class User(BaseModel):
             self, exclude=[User.password, User.created_at, User.updated_at]
         )
 
-    def to_dict(self, recurse=False):
-        return model_to_dict(self, recurse=recurse, exclude=[User.password])
+    def to_dict(self, recurse=False, backrefs=False):
+        return model_to_dict(self, recurse=recurse, backrefs=backrefs, exclude=[User.password])
 
     def check_password(self, password: str):
         return bcrypt.checkpw(

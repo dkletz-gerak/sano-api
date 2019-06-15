@@ -11,4 +11,5 @@ views = [
     RoutineAdmin(Routine),
     ScheduleAdmin(Schedule),
     LocationImageAdmin(LocationImage),
+    LocationActivityAdmin(LocationActivity),
 ]
