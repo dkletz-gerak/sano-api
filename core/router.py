@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_admin import Admin
 from typing import Callable, List, Type
 from .middleware import Middleware
 from .exception.core_build_exception import CoreServerException
@@ -89,6 +90,14 @@ class CoreRouter(_BaseRouter):
     def __init__(self, app: Flask):
         super().__init__()
         self.app = app
+        self.admin = None
+
+    def set_admin(self, name='Core Admin'):
+        self.admin = Admin(self.app, name=name, template_mode='bootstrap3')
+
+    def add_admin_views(self, views):
+        for view in views:
+            self.admin.add_view(view)
 
     def execute(self):
         for key, handler in self._routes.items():

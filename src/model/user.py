@@ -38,3 +38,6 @@ class User(BaseModel):
 
     class Meta:
         db_table = "users"
+
+    def __unicode__(self):
+        return self.name

@@ -17,7 +17,7 @@ class BaseModel(pw.Model):
         return model_to_dict(self)
 
     def save(self, *args, **kwargs):
-        self.updated_at = datetime_tz()
+        self.updated_at = datetime_tz().strftime("%Y-%m-%d %H:%M:%S")
         super().save(*args, **kwargs)
 
     class Meta:
