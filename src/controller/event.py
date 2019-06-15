@@ -14,7 +14,7 @@ def get_available_events():
         if location is None:
             raise SanoException(404, NOT_FOUND, "Location not found")
 
-        query_option = query_option | (Event.location == location)
+        query_option = query_option & (Event.location == location)
 
     events = Event.select().where(query_option)
 
