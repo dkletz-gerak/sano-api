@@ -61,12 +61,15 @@ def search_location():
 
     locations = []
     for location in query.namedtuples():
+        weight = location.weight
+        if weight == 0:
+            weight = 1
         locations.append(
             dict(
                 name=location.name,
                 logo=location.logo,
                 address=location.address,
-                calculated_weight=_calculate_weight(location.lat-float(lat), location.long-float(long), location.weight),
+                calculated_weight=_calculate_weight(location.lat-float(lat), location.long-float(long), weight),
                 activities=location.activities.split(",")
             )
         )
