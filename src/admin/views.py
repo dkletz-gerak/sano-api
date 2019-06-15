@@ -4,6 +4,8 @@ from src.model import *
 
 
 class UserAdmin(ModelView):
+    inline_models = (Membership, )
+
     column_exclude_list = ["password"]
     form_overrides = dict(
         role=SelectField,
