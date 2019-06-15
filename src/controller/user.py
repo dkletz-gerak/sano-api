@@ -55,6 +55,7 @@ def get_profile():
     user = User.get_or_none(User.id == user["id"])
 
     data = user.to_dict()
-    data["membership"] = Membership.get_or_none(Membership.user == user.id)
+    membership = Membership.get_or_none(Membership.user == user.id)
+    data["membership"] = membership.to_dict()
 
     return respond_data(data)
