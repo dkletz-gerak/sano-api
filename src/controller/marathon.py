@@ -1,4 +1,5 @@
-from src.model.marathon import Marathon
+from src.model import Location, Marathon
+from src.exception import *
 from core.util import *
 from flask import request
 
@@ -9,11 +10,15 @@ def add_marathon():
     lat = request.json.get("lat")
     long = request.json.get("long")
 
+    location = Location.get_or_none(Location.id == location_id)
+    if location is None:
+        raise SanoException(404, NOT_FOUND, "location not found")
+
     marathon = Marathon(
         preferences=preferences,
         lat=lat,
         long=long,
-        location=location_id,
+        location=location,
     )
     marathon.save()
 
