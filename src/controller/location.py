@@ -3,7 +3,7 @@ from peewee import fn
 import math
 from core.util import *
 from src.exception import *
-from src.model import Location, LocationActivity, Activity
+from src.model import Location, LocationActivity, Activity, Category
 from datetime import datetime
 
 
@@ -50,9 +50,10 @@ def search_location():
         query = Activity.select()
     activities_query = [activity.to_dict()["id"] for activity in query]
 
-    query = Location.select(Location,
+    query = Location.select(Location, Category.name.alias("category_name"),
                             fn.SUM(LocationActivity.weight).alias('weight')) \
                     .join(LocationActivity) \
+                    .join(Category, on=Category.id == Location.category) \
                     .where(LocationActivity.activity.in_(activities_query)) \
                     .group_by(Location)
 
@@ -72,6 +73,7 @@ def search_location():
                 name=location.name,
                 logo=location.logo,
                 address=location.address,
+                category=location.category_name,
                 normal_weight=weight,
                 calculated_weight=_calculate_weight(location.lat-float(lat), location.long-float(long), weight),
                 activities=[activity.name for activity in activities],
