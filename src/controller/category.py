@@ -4,7 +4,7 @@ from core.util import *
 
 
 def get_all_categories():
-    categories = Category.select().dicts()
+    categories = Category.select().get().dicts()
     return respond_data(categories)
 
 
