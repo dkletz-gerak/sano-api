@@ -10,4 +10,5 @@ views = [
     MembershipAdmin(Membership),
     RoutineAdmin(Routine),
     ScheduleAdmin(Schedule),
+    LocationImageAdmin(LocationImage),
 ]

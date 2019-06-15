@@ -1,5 +1,6 @@
 from flask_admin.contrib.peewee import ModelView
 from wtforms import PasswordField, SelectField
+from wtforms.validators import Optional
 from src.model import *
 
 
@@ -8,8 +9,9 @@ class UserAdmin(ModelView):
         (
             Membership,
             dict(
-                form_overrides=dict(member_type=SelectField,),
+                form_overrides=dict(member_type=SelectField, ),
                 form_args=dict(
+                    id=dict(validators=[Optional()]),
                     member_type=dict(
                         choices=[
                             ('bronze', 'bronze'),
@@ -46,7 +48,12 @@ class CategoryAdmin(ModelView):
 
 
 class LocationAdmin(ModelView):
-    inline_models = (LocationImage, LocationActivity, Routine, Event)
+    inline_models = [
+        (LocationImage, dict(form_args=dict(id=dict(validators=[Optional()])))),
+        (LocationActivity, dict(form_args=dict(id=dict(validators=[Optional()])))),
+        (Routine, dict(form_args=dict(id=dict(validators=[Optional()])))),
+        (Event, dict(form_args=dict(id=dict(validators=[Optional()]))))
+    ]
 
 
 class EventAdmin(ModelView):
@@ -54,7 +61,7 @@ class EventAdmin(ModelView):
 
 
 class ActivityAdmin(ModelView):
-    inline_models = (LocationActivity, )
+    inline_models = [(LocationActivity, dict(form_args=dict(id=dict(validators=[Optional()]))))]
 
 
 class MembershipAdmin(ModelView):
@@ -73,8 +80,12 @@ class MembershipAdmin(ModelView):
 
 
 class RoutineAdmin(ModelView):
-    inline_models = (Schedule, )
+    inline_models = [(Schedule, dict(form_args=dict(id=dict(validators=[Optional()]))))]
 
 
 class ScheduleAdmin(ModelView):
+    pass
+
+
+class LocationImageAdmin(ModelView):
     pass
