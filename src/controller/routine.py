@@ -15,7 +15,7 @@ def get_routines():
 
         query_option = Routine.location == location
 
-    routines = Routine.select(Routine).join(Location).where(query_option)
+    routines = Routine.select(Routine).where(query_option)
 
     return respond_data([routine.to_dict() for routine in routines])
 
