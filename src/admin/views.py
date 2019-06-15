@@ -4,7 +4,23 @@ from src.model import *
 
 
 class UserAdmin(ModelView):
-    inline_models = (Membership, )
+    inline_models = [
+        (
+            Membership,
+            dict(
+                form_overrides=dict(member_type=SelectField,),
+                form_args=dict(
+                    member_type=dict(
+                        choices=[
+                            ('bronze', 'bronze'),
+                            ('silver', 'silver'),
+                            ('gold', 'gold')
+                        ]
+                    )
+                )
+            )
+        )
+    ]
 
     column_exclude_list = ["password"]
     form_overrides = dict(
@@ -42,7 +58,18 @@ class ActivityAdmin(ModelView):
 
 
 class MembershipAdmin(ModelView):
-    pass
+    form_overrides = dict(
+        member_type=SelectField,
+    )
+    form_args = dict(
+        member_type=dict(
+            choices=[
+                ('bronze', 'bronze'),
+                ('silver', 'silver'),
+                ('gold', 'gold')
+            ]
+        )
+    )
 
 
 class RoutineAdmin(ModelView):
