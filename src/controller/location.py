@@ -65,6 +65,8 @@ def search_location():
         elif len(preferences) == 0:
             weight = 1
 
+        activities = Activity.select().join(LocationActivity).where(LocationActivity.location == location.id)
+
         locations.append(
             dict(
                 name=location.name,
@@ -72,6 +74,7 @@ def search_location():
                 address=location.address,
                 normal_weight=weight,
                 calculated_weight=_calculate_weight(location.lat-float(lat), location.long-float(long), weight),
+                activities=[activity.name for activity in activities],
                 price=location.price
             )
         )
