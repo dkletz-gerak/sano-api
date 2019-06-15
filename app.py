@@ -1,5 +1,5 @@
-import os
-
+import core.load_env
+from setting import *
 from core.exception.core_http_exception import CoreHttpException
 from core.router import CoreRouter
 from flask_cors import CORS
@@ -35,8 +35,8 @@ app = initialize_app()
 
 if __name__ == "__main__":
     app.run(
-        port=int(os.getenv("PORT")),
-        host=os.getenv("HOST"),
-        threaded=True,
-        debug=os.getenv("DEBUG"),
+        host=HOST,
+        port=PORT,
+        threaded=THREADED,
+        debug=DEBUG,
     )
