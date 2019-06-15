@@ -4,8 +4,8 @@ from core.util import *
 
 
 def get_all_categories():
-    categories = Category.select().get().dicts()
-    return respond_data(categories)
+    query = Category.select().dicts()
+    return respond_data([category for category in query])
 
 
 def get_category_by_id(category_id):
