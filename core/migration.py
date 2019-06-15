@@ -13,7 +13,7 @@ def execute(name, path):
     try:
         module.migrator.migrate()
     except Exception as e:
-        print("An error occured : ", e)
+        print("An error occurred : ", e)
 
 
 def create_tables_if_not_exist():

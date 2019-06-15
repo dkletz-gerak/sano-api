@@ -1,5 +1,5 @@
 from enum import Enum
-from src.model.base import BaseModel
+from core.model.base import BaseModel
 from playhouse.shortcuts import model_to_dict
 import peewee as pw
 import bcrypt
